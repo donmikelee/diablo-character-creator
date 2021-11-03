@@ -1,0 +1,15 @@
+ul{
+    list-style-type: none;
+    display: flex;
+    
+}
+
+li {
+    opacity: 0.8;
+    margin-left: 10px;
+}
+
+li:hover{
+    opacity: 1;
+    cursor: pointer;
+}

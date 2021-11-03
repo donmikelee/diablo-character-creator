@@ -1,43 +1,52 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Hero from '../components/Hero'
 
 
 const Characters = () => {
 
-  let history = useHistory();
+  const [name, setName] = useState('');
+  const [hero, setHero] = useState('');
+  // const [active, setActive] = useState(false);
 
-  const [value, setValue] = useState('');
-
-  const handleOnChange = event => setValue(event.target.value)
-
-  const createHero = () => {
-
-    history.push('/hero-editor')
+  const setActiveHero = (id) => {
+    console.log(id)
   }
 
+  
+  const setHeroOnClick = (e) => {
+    setHero(e.target.innerHTML)
+  }
 
+  const handleOnChange = event => setName(event.target.value)
+  
+  const handleOnClick = (e) => {
+    setHeroOnClick(e);
+  }
+
+  
+  
 
   return (
     <>
       <header><h2>Choose your hero:</h2></header>
       <section>
-        <div><h3>Amazon</h3></div>
-        <div><h3>Assassin</h3></div>
-        <div><h3>Necromancer</h3></div>
-        <div><h3>Barbarian</h3></div>
-        <div><h3>Sorceress</h3></div>
-        <div><h3>Paladin</h3></div>
-        <div><h3>Druid</h3></div>
+        <div>
+          <Hero onclick={handleOnClick} function={setActiveHero}></Hero>
+        </div>
       </section>
       <section>
         <label>Character name</label>
-        <input type="text" placeholder="My name is..." onChange={handleOnChange} value={value}/>
+        <input type="text" placeholder="My name is... " onChange={handleOnChange} value={name}/>
         <Link to={
         {
           pathname: '/hero-editor',
-          state: value,
+          state: {
+            name: name,
+            class: hero
+          }
         }
-      }><button onClick={createHero}>Start</button>
+      }><button>Start</button>
       </Link>
       </section>
     </>
