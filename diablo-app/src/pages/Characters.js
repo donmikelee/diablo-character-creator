@@ -5,34 +5,74 @@ import Hero from '../components/Hero'
 
 const Characters = () => {
 
+  const [active, setActive] = useState(false);
+
+  const heroes = [
+    {
+      id: 0,
+      class: 'Amazon',
+      active: active
+    },
+    {
+      id: 1,
+      class: 'Assassin',
+    },
+    {
+      id: 2,
+      class: 'Necromancer',
+    },
+    {
+      id: 3,
+      class: 'Barbarian',
+    },
+    {
+      id: 4,
+      class: 'Sorceress',
+    },
+    {
+      id: 5,
+      class: 'Paladin',
+    },
+    {
+      id: 6,
+      class: 'Druid',
+    },
+  ];
+
+  const [array, neyArray] = useState(heroes)
   const [name, setName] = useState('');
   const [hero, setHero] = useState('');
-  // const [active, setActive] = useState(false);
+  
+  console.log(array)
+  
 
   const setActiveHero = (id) => {
-    console.log(id)
+
+    const newHeroes = [...heroes];
+    const index = newHeroes.findIndex(hero => hero.id === id );
+
+    const choosedHero = newHeroes.splice(index, 1)
+
   }
 
-  
   const setHeroOnClick = (e) => {
     setHero(e.target.innerHTML)
+    
+    
   }
 
   const handleOnChange = event => setName(event.target.value)
-  
-  const handleOnClick = (e) => {
-    setHeroOnClick(e);
-  }
 
   
   
-
+  
+ 
   return (
     <>
       <header><h2>Choose your hero:</h2></header>
       <section>
         <div>
-          <Hero onclick={handleOnClick} function={setActiveHero}></Hero>
+          <Hero active={active} onclick={setActiveHero} sethero={setActiveHero} array={array}></Hero>
         </div>
       </section>
       <section>
