@@ -13,3 +13,8 @@ li:hover{
     opacity: 1;
     cursor: pointer;
 }
+
+li.active{
+    font-weight: bold;
+    color:crimson;
+}

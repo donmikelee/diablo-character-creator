@@ -1,6 +1,6 @@
 import '../style/Hero.css';
 
-const Hero = ({ array, onclick, active }) => {
+const Hero = ({ array, onclick, index, onchange }) => {
   const heroArray = array;
   const setHero = onclick;
 
@@ -8,8 +8,9 @@ const Hero = ({ array, onclick, active }) => {
     <li
       key={Math.random()}
       id={hero.id}
-      className={active ? 'active' : 'unactive'}
-      onClick={() => setHero(hero.id)}
+      className={hero.id === index ? 'active' : null}
+      onClick={(e) => setHero(hero.id, e)}
+      onChange={onchange}
     >
       {hero.class}
     </li>
