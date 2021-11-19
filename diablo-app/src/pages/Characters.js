@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Hero from '../components/Hero'
-import { useForm } from 'react-hook-form'
+import Input from '../components/Input'
+import Button from '../components/Button'
 
 
 
@@ -47,9 +47,7 @@ const Characters = () => {
 
  
   
-  const { register } = useForm({
-    
-  });
+  
 
 
   const setIndexHero = (id) => {
@@ -98,27 +96,10 @@ const Characters = () => {
           </div>
         </section>
         <section>
-          <label htmlFor="hero-name">Character name</label>
-          <input {...register("name", {required: true})}
-            disabled={disabled}
-            id="hero-name" 
-            name="name" 
-            type="text" 
-            placeholder="My name is... " 
-            onChange={handleOnChange} 
-            value={name}
-            />
-              <Link to={
-              {
-                pathname: '/hero-editor',
-                state: {
-                  name: name,
-                  class: hero
-                }
-              }
-              }>
-                <input disabled={disabledButton} type="submit" value="Start"/>
-              </Link>
+          <div>
+            <Input name={name} disabled={disabled} handleonchange={handleOnChange} />
+            <Button name={name} disabledButton={disabledButton} hero={hero}/>
+          </div>
         </section>
       </form>
     </>
