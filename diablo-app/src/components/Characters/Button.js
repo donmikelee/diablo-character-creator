@@ -5,7 +5,7 @@ const Button = ({ name, hero, disabledButton }) => {
   return (
     <Link
       to={{
-        pathname: `/hero-editor-${hero}`,
+        pathname: `/hero-editor`,
         state: {
           name: name,
           class: hero,

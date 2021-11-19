@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import Hero from '../components/Hero'
-import Input from '../components/Input'
-import Button from '../components/Button'
-
-
+import Heros from '../components/Characters/Heros';
+import Input from '../components/Characters/Input';
+import Button from '../components/Characters/Button';
 
 const Characters = () => {
-
   const heroes = [
     {
       id: 0,
@@ -38,67 +35,59 @@ const Characters = () => {
     },
   ];
 
-  
   const [name, setName] = useState('');
   const [hero, setHero] = useState('');
   const [index, setIndex] = useState('');
   const [disabled, setAvailable] = useState(true);
   const [disabledButton, setButton] = useState(true);
 
- 
-  
-  
-
-
   const setIndexHero = (id) => {
-
     const newHeroes = [...heroes];
-    const index = newHeroes.findIndex(hero => hero.id === id );
+    const index = newHeroes.findIndex((hero) => hero.id === id);
 
-    setIndex(index)
+    setIndex(index);
 
-    setAvailable(false)
-  }
-
-
+    setAvailable(false);
+  };
 
   const setHeroOnClick = (e) => {
-    setHero(e.target.innerHTML)
-
-  }
+    setHero(e.target.innerHTML);
+  };
 
   const handleOnClick = (id, e) => {
-    setIndexHero(id)
-    setHeroOnClick(e)
-  } 
+    setIndexHero(id);
+    setHeroOnClick(e);
+  };
 
-  const handleOnChange = event => {
-    
-    setName(event.target.value)
+  const handleOnChange = (event) => {
+    setName(event.target.value);
 
-    if(event.target.value.length >= 2){
+    if (event.target.value.length >= 2) {
       setButton(false);
+    } else {
+      setButton(true);
     }
-    else{
-      setButton(true)
-    }
+  };
 
-  }
-
- 
   return (
     <>
-      <header><h2>Choose your hero:</h2></header>
+      <header>
+        <h2>Choose your hero:</h2>
+      </header>
       <form>
         <section>
           <div>
-            <Hero onclick={handleOnClick} array={heroes} index={index}></Hero>
+            <Heros onclick={handleOnClick} array={heroes} index={index} />
           </div>
         </section>
         <section>
           <div>
-            <Input name={name} disabled={disabled} handleonchange={handleOnChange} />
-            <Button name={name} disabledButton={disabledButton} hero={hero}/>
+            <Input
+              name={name}
+              disabled={disabled}
+              handleonchange={handleOnChange}
+            />
+            <Button name={name} disabledButton={disabledButton} hero={hero} />
           </div>
         </section>
       </form>

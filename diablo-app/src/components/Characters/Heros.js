@@ -1,6 +1,6 @@
-import '../style/Hero.css';
+import '../../style/Hero.css';
 
-const Hero = ({ array, onclick, index, onchange }) => {
+const Heros = ({ array, onclick, index, onchange }) => {
   const heroArray = array;
   const setHero = onclick;
 
@@ -19,4 +19,4 @@ const Hero = ({ array, onclick, index, onchange }) => {
   return <ul>{hero}</ul>;
 };
 
-export default Hero;
+export default Heros;
