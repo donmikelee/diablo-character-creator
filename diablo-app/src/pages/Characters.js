@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero'
 import { useForm } from 'react-hook-form'
@@ -43,10 +43,11 @@ const Characters = () => {
   const [hero, setHero] = useState('');
   const [index, setIndex] = useState('');
   const [disabled, setAvailable] = useState(true);
- 
+  const [disabledButton, setButton] = useState(true);
+
  
   
-  const { register, handleSubmit } = useForm({
+  const { register } = useForm({
     
   });
 
@@ -58,13 +59,9 @@ const Characters = () => {
 
     setIndex(index)
 
-    
+    setAvailable(false)
   }
 
-  
-  useEffect(() => {
-    setAvailable(prevValue => !prevValue)
-  }, [])
 
 
   const setHeroOnClick = (e) => {
@@ -77,26 +74,24 @@ const Characters = () => {
     setHeroOnClick(e)
   } 
 
-  const handleOnChange = event => setName(event.target.value)
+  const handleOnChange = event => {
+    
+    setName(event.target.value)
 
-  
-  
+    if(event.target.value.length >= 2){
+      setButton(false);
+    }
+    else{
+      setButton(true)
+    }
 
-  
+  }
 
+ 
   return (
     <>
       <header><h2>Choose your hero:</h2></header>
-      <form onSubmit={handleSubmit((data) =>{
-        console.log(data)
-
-        if(index === ""){
-          console.log("Nie wybrałeś klasy kolego")
-        }
-        else{
-          console.log("Klasa została wybrana")
-        }
-      })}>
+      <form>
         <section>
           <div>
             <Hero onclick={handleOnClick} array={heroes} index={index}></Hero>
@@ -106,8 +101,6 @@ const Characters = () => {
           <label htmlFor="hero-name">Character name</label>
           <input {...register("name", {required: true})}
             disabled={disabled}
-            minLength="2" 
-            maxLength="15" 
             id="hero-name" 
             name="name" 
             type="text" 
@@ -115,8 +108,7 @@ const Characters = () => {
             onChange={handleOnChange} 
             value={name}
             />
-            
-              {/* <Link to={
+              <Link to={
               {
                 pathname: '/hero-editor',
                 state: {
@@ -124,9 +116,9 @@ const Characters = () => {
                   class: hero
                 }
               }
-              }> */}
-                <input type="submit" value="Start"/>
-              {/* </Link> */}
+              }>
+                <input disabled={disabledButton} type="submit" value="Start"/>
+              </Link>
         </section>
       </form>
     </>
